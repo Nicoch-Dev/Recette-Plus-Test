@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mon compte | Recette Plus</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <img
+                    src="../image/logo.PNG"
+                    alt="Logo Recette Plus"
+                >
+
+            </a>
+
+        </div>
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+
+        <nav class="navigation">
+
+            <a href="../index.html">
+                Accueil
+            </a>
+
+            <a href="./mes-recettes.html">
+                Mes recettes
+            </a>
+
+            <a href="./ia-recette.html">
+                IA Culinaire
+            </a>
+
+        </nav>
+
+
+        <div class="user-auth">
+
+            <a
+                href="./mon-compte.html"
+                id="accountButton"
+                class="account-button"
+            >
+
+                <img
+                    src="../image/user.png"
+                    alt=""
+                    class="account-icon"
+                >
+
+                <span id="userName">
+                    Bonjour
+                </span>
+
+            </a>
+
+
+            <a
+                href="#"
+                id="loginButton"
+                class="login-button"
+            >
+                Se déconnecter
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="account-page">
+
+        <section class="account-card">
+
+            <div class="account-title">
+
+                <img
+                    src="../image/user.png"
+                    alt=""
+                    class="account-main-icon"
+                >
+
+                <div>
+
+                    <h1>
+                        Mon compte
+                    </h1>
+
+                    <p>
+                        Gérez vos informations Recette Plus.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- INFORMATIONS -->
+
+            <div class="account-section">
+
+                <h2>
+                    Mes informations
+                </h2>
+
+
+                <form id="profileForm">
+
+                    <div class="form-group">
+
+                        <label for="accountName">
+                            Prénom
+                        </label>
+
+                        <input
+                            type="text"
+                            id="accountName"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="profileBio">
+                            Présentation publique
+                        </label>
+
+                        <textarea
+                            id="profileBio"
+                            rows="4"
+                            maxlength="250"
+                            placeholder="Parlez un peu de votre cuisine..."
+                        ></textarea>
+
+                        <small>
+                            Cette présentation sera visible dans la communauté.
+                        </small>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="profileAvatar">
+                            Photo de profil
+                        </label>
+
+                        <input
+                            type="file"
+                            id="profileAvatar"
+                            accept="image/*"
+                        >
+
+                        <img
+                            id="avatarPreview"
+                            class="avatar-preview"
+                            alt="Photo de profil"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="accountEmail">
+                            Adresse e-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            id="accountEmail"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="account-save-button"
+                        id="profileButton"
+                    >
+                        Enregistrer les modifications
+                    </button>
+
+
+                    <div
+                        id="profileMessage"
+                        class="auth-message"
+                    ></div>
+
+                </form>
+
+            </div>
+
+
+            <!-- STATISTIQUES -->
+
+            <div class="account-section">
+
+                <h2>
+                    Mes recettes
+                </h2>
+
+
+                <div class="account-stat">
+
+                    <span
+                        id="recipeCount"
+                        class="account-stat-number"
+                    >
+                        0
+                    </span>
+
+                    <span id="recipeLimitLabel">
+                        recettes enregistrées
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="./mes-recettes.html"
+                    class="account-link"
+                >
+                    Voir mes recettes →
+                </a>
+
+            </div>
+
+            <!-- CRÉDITS ET UTILISATION -->
+
+            <div class="account-section">
+
+                <h2>
+                    Crédits et utilisation
+                </h2>
+
+                <div class="account-stat">
+
+                    <span
+                        id="aiCreditsRemaining"
+                        class="account-stat-number"
+                    >
+                        -
+                    </span>
+
+                    <span id="aiCreditsLabel">
+                        crédits IA gratuits restants sur 10
+                    </span>
+
+                </div>
+
+                <a
+                    href="./credits.html"
+                    class="account-buy-credits"
+                >
+                    Acheter des crédits IA
+                </a>
+
+
+                <div class="account-stat">
+
+                    <span
+                        id="searchesRemaining"
+                        class="account-stat-number"
+                    >
+                        -
+                    </span>
+
+                    <span id="searchesLabel">
+                        recherches Internet restantes aujourd'hui sur 5
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- INVITER UN PROCHE -->
+
+            <div class="account-section">
+
+                <h2>
+                    Inviter un proche
+                </h2>
+
+                <p>
+                    Invitez votre famille ou vos amis à rejoindre Recette Plus
+                    pour partager vos recettes et cuisiner ensemble.
+                </p>
+
+                <div class="account-stat">
+
+                    <span
+                        id="referralCredits"
+                        class="account-stat-number"
+                    >
+                        -
+                    </span>
+
+                    <span>
+                        / 5 crédits gagnés par invitation
+                    </span>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="inviteFriendButton"
+                    class="account-invite-button"
+                >
+                    👥 Inviter un proche
+                </button>
+
+                <div
+                    id="inviteMessage"
+                    class="auth-message"
+                ></div>
+
+            </div>
+
+
+            <!-- SÉCURITÉ -->
+
+            <div class="account-section">
+
+                <h2>
+                    Sécurité
+                </h2>
+
+
+                <a
+                    href="./mot-de-passe-oublie.html"
+                    class="account-link"
+                >
+                    Modifier mon mot de passe
+                </a>
+
+            </div>
+
+
+            <!-- DÉCONNEXION -->
+
+            <button
+                type="button"
+                id="accountLogoutButton"
+                class="account-logout-button"
+            >
+                Se déconnecter
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/protected-page.js"></script>
+
+    <script src="../js/auth-header.js"></script>
+
+    <script src="../js/mobile-menu.js"></script>
+
+    <script src="../js/mon-compte.js"></script>
+
+</body>
+
+</html>

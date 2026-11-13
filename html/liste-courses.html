@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Liste de courses | Recette Plus
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ======================================
+         HEADER
+    ======================================= -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <img
+                src="../image/logo.PNG"
+                alt="Logo Recette Plus"
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+        <nav class="navigation">
+
+            <a href="../index.html">
+                Accueil
+            </a>
+
+            <a href="./planning.html">
+                Planning
+            </a>
+
+            <a href="./ia-recette.html">
+                IA Culinaire
+            </a>
+
+            <a href="./mes-recettes.html">
+                Mes recettes
+            </a>
+
+            <a href="./favoris.html">
+                Favoris
+            </a>
+
+            <a href="./communaute.html">
+                Communauté
+            </a>
+
+        </nav>
+
+
+        <div class="icons">
+
+            <a
+                href="./liste-courses.html"
+                class="shopping-header-button"
+                id="shoppingHeaderButton"
+                aria-label="Ma liste de courses"
+                title="Ma liste de courses"
+            >
+                <span class="shopping-header-icon">🛒</span>
+
+                <span
+                    id="shoppingBadge"
+                    class="shopping-badge"
+                    hidden
+                >
+                    0
+                </span>
+            </a>
+
+            <a
+                href="./notifications.html"
+                class="notification-button"
+                id="notificationButton"
+                aria-label="Notifications"
+            >
+
+                <span class="notification-bell">
+                    🔔
+                </span>
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                >
+                    0
+                </span>
+
+            </a>
+
+
+            <div class="user-auth">
+
+                <a
+                    href="./mon-compte.html"
+                    id="accountButton"
+                    class="account-button"
+                >
+
+                    <img
+                        src="../image/user.png"
+                        alt=""
+                        class="account-icon"
+                    >
+
+                    <span id="userName"></span>
+
+                </a>
+
+
+                <a
+                    href="#"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    Se connecter
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-text">
+
+            <p>Cuisiner 🤍</p>
+            <p>Partager</p>
+            <p>Se régaler !</p>
+
+        </div>
+
+    </header>
+
+
+    <!-- ======================================
+         LISTE DE COURSES
+    ======================================= -->
+
+    <main class="shopping-page">
+
+        <section class="shopping-container">
+
+
+            <div class="shopping-title">
+
+                <div>
+
+                    <span class="shopping-eyebrow">
+                        🛒 Recette Plus
+                    </span>
+
+                    <h1>
+                        Ma liste de courses
+                    </h1>
+
+                    <p>
+                        Tous les ingrédients dont
+                        vous avez besoin au même endroit.
+                    </p>
+
+                </div>
+
+
+                <div class="shopping-main-actions">
+
+                    <button
+                        type="button"
+                        id="toggleAllShoppingItems"
+                        class="toggle-all-shopping-button"
+                    >
+                        ✓ Tout cocher
+                    </button>
+
+                    <button
+                        type="button"
+                        id="deleteCheckedItems"
+                        class="delete-checked-button"
+                    >
+                        Supprimer les cochés
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="shoppingSummary"
+                class="shopping-summary"
+            ></div>
+
+
+            <div
+                id="shoppingList"
+                class="shopping-list"
+            >
+
+                <p class="loading">
+                    Chargement de la liste...
+                </p>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- ======================================
+         FOOTER
+    ======================================= -->
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <h2>
+                    Recette Plus
+                </h2>
+
+                <p>
+                    Cuisiner, partager,
+                    se régaler.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="../index.html">
+                    Accueil
+                </a>
+
+                <a href="./mes-recettes.html">
+                    Mes recettes
+                </a>
+
+                <a href="./favoris.html">
+                    Favoris
+                </a>
+
+                <a href="./creer-recette.html">
+                    Créer une recette
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Recette Plus
+            </p>
+
+            <p>
+                Site créé et réalisé par
+                <a href="#">
+                    MND3V
+                </a>
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ======================================
+         SCRIPTS
+    ======================================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/protected-page.js"></script>
+
+    <script src="../js/notifications-header.js"></script>
+
+    <script src="../js/auth-header.js"></script>
+
+    <script src="../js/shopping-header.js"></script>
+
+    <script src="../js/mobile-menu.js"></script>
+
+    <script src="../js/liste-courses.js"></script>
+
+
+</body>
+
+</html>

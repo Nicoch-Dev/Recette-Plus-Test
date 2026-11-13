@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Groupes | Recette Plus</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link rel="stylesheet" href="../css/groupes.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <img
+                    src="../image/logo.PNG"
+                    alt="Logo Recette Plus"
+                >
+
+            </a>
+
+        </div>
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navigation">
+
+            <a href="../index.html">
+                Accueil
+            </a>
+
+            <a href="#">
+                Recettes
+            </a>
+
+            <a href="../html/planning.html">
+                Planning
+            </a>
+
+            <a href="./ia-recette.html">
+                IA Culinaire
+            </a>
+
+            <a href="./mes-recettes.html">
+                Mes recettes
+            </a>
+
+            <a href="./favoris.html">
+                Favoris
+            </a>
+
+            <a
+                href="./communaute.html"
+                class="active"
+            >
+                Communauté
+            </a>
+
+        </nav>
+
+
+        <div class="icons">
+
+            <a
+                href="./liste-courses.html"
+                class="shopping-header-button"
+                id="shoppingHeaderButton"
+                aria-label="Ma liste de courses"
+                title="Ma liste de courses"
+            >
+                <span class="shopping-header-icon">🛒</span>
+
+                <span
+                    id="shoppingBadge"
+                    class="shopping-badge"
+                    hidden
+                >
+                    0
+                </span>
+            </a>
+
+            <a
+                href="./notifications.html"
+                class="notification-button"
+                id="notificationButton"
+                aria-label="Notifications"
+            >
+                <span class="notification-bell">
+                    🔔
+                </span>
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                >
+                    0
+                </span>
+            </a>
+
+            <div class="user-auth">
+
+                <a
+                    href="./mon-compte.html"
+                    id="accountButton"
+                    class="account-button"
+                >
+
+                    <img
+                        src="../image/user.png"
+                        alt=""
+                        class="account-icon"
+                    >
+
+                    <span id="userName"></span>
+
+                </a>
+
+
+                <a
+                    href="./connexion.html"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    Se connecter
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-text">
+
+            <p>Cuisiner 🤍</p>
+            <p>Partager</p>
+            <p>Se régaler !</p>
+
+        </div>
+
+    </header>
+
+
+    
+    <!-- ==========================================
+        PAGE - RECETTES D'UN GROUPE
+    ========================================== -->
+
+    <main class="groups-page">
+
+        <div class="groups-wrap">
+
+            <!-- EN-TÊTE DU GROUPE -->
+
+            <div class="groups-hero">
+
+                <a
+                    href="./groupes.html"
+                    class="groups-back"
+                >
+                    ← Retour aux groupes
+                </a>
+
+                <h1 id="groupTitle">
+                    Mon groupe
+                </h1>
+
+                <p id="groupDescription">
+                    Découvrez les recettes partagées par les membres.
+                </p>
+
+            </div>
+
+
+            <!-- MESSAGES D'INFORMATION -->
+
+            <p
+                id="groupStatus"
+                class="groups-status"
+                role="status"
+                aria-live="polite"
+            ></p>
+
+
+            <!-- PARTAGE DE RECETTE -->
+
+            <div class="groups-actions">
+
+                <button
+                    id="shareGroupRecipeButton"
+                    class="groups-button"
+                    type="button"
+                    disabled
+                >
+                    + Partager une recette
+                </button>
+
+            </div>
+
+
+            <!-- RECETTES PUBLIÉES -->
+
+            <section
+                class="groups-panel"
+                aria-labelledby="groupRecipesTitle"
+            >
+
+                <h2 id="groupRecipesTitle">
+                    Les recettes du groupe
+                </h2>
+
+                <div
+                    id="groupRecipes"
+                    class="groups-grid"
+                >
+
+                    <p class="groups-empty">
+                        Chargement des recettes…
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        <!-- ==========================================
+            MEMBRES DU GROUPE
+        ========================================== -->
+
+        <section
+            class="groups-panel"
+            aria-labelledby="groupMembersTitle"
+        >
+
+            <h2 id="groupMembersTitle">
+                Membres du groupe
+            </h2>
+
+            <button
+                id="inviteGroupMemberButton"
+                class="groups-button"
+                type="button"
+                hidden
+            >
+                + Inviter un membre
+            </button>
+
+            <div
+                id="groupMembers"
+                class="groups-grid"
+            >
+
+                <p class="groups-empty">
+                    Chargement des membres…
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUPPRESSION DU GROUPE -->
+        <div class="group-delete-section" id="groupDeleteSection" hidden>
+            <button
+                type="button"
+                id="deleteGroupButton"
+                class="group-delete-button"
+            >
+                Supprimer le groupe
+            </button>
+        </div>
+
+
+
+        <!-- FENÊTRE D'INVITATION AU GROUPE -->
+
+        <dialog id="inviteGroupDialog" class="group-invite-dialog">
+
+            <div class="group-invite-header">
+                <h2>Inviter un membre</h2>
+
+                <button
+                    type="button"
+                    id="closeInviteGroupDialog"
+                    aria-label="Fermer"
+                >
+                    ✕
+                </button>
+            </div>
+
+            <p>
+                Invitez une personne que vous suivez
+                dans la Communauté Recette Plus.
+            </p>
+
+            <input
+                type="search"
+                id="groupMemberSearch"
+                placeholder="Rechercher parmi mes abonnements..."
+                aria-label="Rechercher une personne suivie"
+            >
+
+            <div
+                id="groupInviteUsers"
+                class="group-invite-users"
+                aria-live="polite"
+            >
+                <p>Chargement des utilisateurs...</p>
+            </div>
+
+        </dialog>
+
+
+
+        </div>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <h2>
+                    Recette Plus
+                </h2>
+
+                <p>
+                    Cuisiner, partager, se régaler.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="../index.html">
+                    Accueil
+                </a>
+
+                <a href="./mes-recettes.html">
+                    Mes recettes
+                </a>
+
+                <a href="./favoris.html">
+                    Favoris
+                </a>
+
+                <a href="./communaute.html">
+                    Communauté
+                </a>
+
+                <a href="./creer-recette.html">
+                    Créer une recette
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Recette Plus
+            </p>
+
+            <p>
+                Site créé et réalisé par
+                <a href="#">MND3V</a>
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/notifications-header.js"></script>
+
+    <script src="../js/protected-page.js"></script>
+
+    <script src="../js/auth-header.js"></script>
+
+    <script src="../js/shopping-header.js"></script>
+
+    <script src="../js/mobile-menu.js"></script>
+
+    <script src="../js/groupe.js"></script>
+
+</body>
+
+</html>

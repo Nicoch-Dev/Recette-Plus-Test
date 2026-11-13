@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mes défis récents | Recette Plus</title>
+<link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<header class="header">
+<div class="logo">
+<img alt="Logo Recette plus" src="../image/logo.PNG"/>
+</div>
+<button aria-expanded="false" aria-label="Ouvrir le menu" class="mobile-menu-button" id="mobileMenuButton" type="button">
+<span></span>
+<span></span>
+<span></span>
+</button>
+<nav class="navigation">
+<a href="../index.html">Accueil</a>
+<a href="./planning.html">Planning</a>
+<a href="../html/ia-recette.html">IA Culinaire</a>
+<a href="../html/mes-recettes.html">Mes recettes</a>
+<a href="../html/favoris.html">Favoris</a>
+<a href="../html/communaute.html">Communauté</a>
+</nav>
+<div class="icons">
+<a aria-label="Ma liste de courses" class="shopping-header-button" href="./liste-courses.html" id="shoppingHeaderButton" title="Ma liste de courses">
+<span class="shopping-header-icon">🛒</span>
+<span class="shopping-badge" hidden="" id="shoppingBadge">
+                    0
+                </span>
+</a>
+<a aria-label="Notifications" class="notification-button" href="./notifications.html" id="notificationButton">
+<span class="notification-bell">
+                    🔔
+                </span>
+<span class="notification-badge" id="notificationBadge">
+                    0
+                </span>
+</a>
+<div class="user-auth">
+<a class="account-button" href="./mon-compte.html" id="accountButton">
+<img alt="" class="account-icon" src="../image/user.png"/>
+<span id="userName"></span>
+</a>
+<a class="login-button" href="#" id="loginButton">
+                    Se connecter
+                </a>
+</div>
+</div>
+<div class="header-text">
+<p>Cuisiner 🤍</p>
+<p>Partager</p>
+<p>Se régaler !</p>
+</div>
+</header>
+<main class="mes-defis-page">
+<div class="mes-defis-container">
+<a class="mes-defis-back" href="./defi-frigo.html">← Retour au Défi du Frigo</a>
+<header class="mes-defis-header">
+<h1>Mes défis récents</h1>
+<p>Retrouvez vos défis des 7 derniers jours, sans dépenser de nouveaux crédits.</p>
+</header>
+<p aria-live="polite" id="mesDefisStatus" role="status">Chargement de vos défis…</p>
+<div aria-live="polite" id="mesDefisList"></div>
+</div>
+</main>
+<footer class="site-footer">
+<div class="footer-container">
+<div class="footer-brand">
+<h2>
+                Recette Plus
+            </h2>
+<p>
+                Cuisiner, partager, se régaler.
+            </p>
+</div>
+<div class="footer-links">
+<a href="../index.html">
+                Accueil
+            </a>
+<a href="../html/mes-recettes.html">
+                Mes recettes
+            </a>
+<a href="../html/favoris.html">
+                Favoris
+            </a>
+<a href="../html/creer-recette.html">
+                Créer une recette
+            </a>
+</div>
+</div>
+<div class="footer-bottom">
+<p>
+            © 2026 Recette Plus
+        </p>
+<p>
+            Site créer et réaliser par <a href="#">MND3V</a>
+</p>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/protected-page.js"></script>
+<script src="../js/notifications-header.js"></script>
+<script src="../js/auth-header.js"></script>
+<script src="../js/shopping-header.js"></script>
+<script src="../js/mobile-menu.js"></script>
+<script src="../js/mes-defis.js"></script>
+</body>
+</html>

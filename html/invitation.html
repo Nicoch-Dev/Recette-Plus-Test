@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Invitation | Recette Plus</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <img
+                    src="../image/logo.PNG"
+                    alt="Logo Recette Plus"
+                >
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="invitation-page">
+
+        <section class="invitation-card">
+
+            <div class="invitation-icon">
+                👥
+            </div>
+
+
+            <p class="invitation-label">
+                Vous avez reçu une invitation
+            </p>
+
+
+            <h1 id="invitationTitle">
+                Rejoignez Recette Plus
+            </h1>
+
+
+            <p
+                id="invitationText"
+                class="invitation-text"
+            >
+                Un proche vous invite à rejoindre Recette Plus
+                pour partager vos recettes et cuisiner ensemble.
+            </p>
+
+
+            <div
+                id="invitationLoading"
+                class="invitation-loading"
+            >
+                Vérification de l'invitation...
+            </div>
+
+
+            <div
+                id="invitationActions"
+                class="invitation-actions"
+                hidden
+            >
+
+                <button
+                    type="button"
+                    id="joinRecettePlusButton"
+                    class="invitation-join-button"
+                >
+                    Rejoindre Recette Plus
+                </button>
+
+
+                <button
+                    type="button"
+                    id="existingAccountButton"
+                    class="invitation-login-button"
+                >
+                    J'ai déjà un compte
+                </button>
+
+            </div>
+
+
+            <div
+                id="invitationError"
+                class="invitation-error"
+                hidden
+            >
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/invitation.js"></script>
+
+</body>
+
+</html>

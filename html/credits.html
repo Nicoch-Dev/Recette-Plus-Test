@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Acheter des crédits - Recette Plus</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+</head>
+
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <img
+                    src="../image/logo.PNG"
+                    alt="Logo Recette Plus"
+                >
+
+            </a>
+
+        </div>
+
+
+        <!-- MENU MOBILE -->
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="navigation">
+
+            <a href="../index.html">
+                Accueil
+            </a>
+
+            <a href="./mes-recettes.html">
+                Mes recettes
+            </a>
+
+            <a href="./ia-recette.html">
+                IA Culinaire
+            </a>
+
+        </nav>
+
+
+        <!-- UTILISATEUR -->
+
+        <div class="user-auth">
+
+            <a
+                href="./mon-compte.html"
+                id="accountButton"
+                class="account-button"
+            >
+
+                <img
+                    src="../image/user.png"
+                    alt=""
+                    class="account-icon"
+                >
+
+                <span id="userName">
+                    Bonjour
+                </span>
+
+            </a>
+
+
+            <a
+                href="#"
+                id="loginButton"
+                class="login-button"
+            >
+                Se déconnecter
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         PAGE CRÉDITS
+    ========================== -->
+
+    <main class="credits-page">
+
+        <div class="credits-intro">
+
+            <span class="credits-eyebrow">
+                CRÉDITS IA
+            </span>
+
+            <h1>
+                Donnez vie à vos idées gourmandes
+            </h1>
+
+            <p>
+                Utilisez vos crédits pour générer une nouvelle recette
+                ou scanner une recette avec Recette Plus.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             PACKS
+        ========================== -->
+
+        <div class="credits-cards">
+
+
+            <!-- PACK 20 CRÉDITS -->
+
+            <section class="credit-card">
+
+                <h2>
+                    20 crédits
+                </h2>
+
+                <div class="credit-price">
+                    1,99 €
+                </div>
+
+                <p class="credit-description">
+                    20 utilisations de l'IA pour générer
+                    ou scanner vos recettes.
+                </p>
+
+                <button
+                    type="button"
+                    id="buy-20"
+                    class="credit-buy-button"
+                >
+                    Acheter 20 crédits
+                </button>
+
+            </section>
+
+
+            <!-- PACK 50 CRÉDITS -->
+
+            <section
+                class="credit-card credit-card-featured"
+            >
+
+                <span class="credit-badge">
+                    LE PLUS AVANTAGEUX
+                </span>
+
+                <h2>
+                    50 crédits
+                </h2>
+
+                <div class="credit-price">
+                    3,99 €
+                </div>
+
+                <p class="credit-description">
+                    50 utilisations de l'IA pour générer
+                    ou scanner vos recettes.
+                </p>
+
+                <button
+                    type="button"
+                    id="buy-50"
+                    class="credit-buy-button"
+                >
+                    Acheter 50 crédits
+                </button>
+
+            </section>
+
+        </div>
+
+
+        <!-- INFORMATIONS -->
+
+        <p class="credits-info">
+            🔒 Paiement sécurisé par Stripe ·
+            Les crédits achetés n'expirent pas
+        </p>
+
+    </main>
+
+
+    <!-- =========================
+         SCRIPTS
+    ========================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/protected-page.js"></script>
+
+    <script src="../js/auth-header.js"></script>
+
+    <script src="../js/mobile-menu.js"></script>
+
+    <script src="../js/credits.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Scanner une recette | Recette Plus
+    </title>
+
+
+    <!-- ==========================================
+         POLICES
+    =========================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ==========================================
+         CSS
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         HEADER RECETTE PLUS
+    =========================================== -->
+
+    <header class="header">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <img
+                    src="../image/logo.PNG"
+                    alt="Logo Recette Plus"
+                >
+
+            </a>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navigation">
+
+            <a href="../index.html">
+                Accueil
+            </a>
+
+            <a href="./planning.html">
+                Planning
+            </a>
+
+            <a href="./ia-recette.html">
+                IA Culinaire
+            </a>
+
+            <a href="./mes-recettes.html">
+                Mes recettes
+            </a>
+
+            <a href="./favoris.html">
+                Favoris
+            </a>
+
+            <a href="./communaute.html">
+                Communauté
+            </a>
+
+        </nav>
+
+
+        <!-- COMPTE + NOTIFICATIONS -->
+
+        <div class="icons">
+
+            <a
+                href="./liste-courses.html"
+                class="shopping-header-button"
+                id="shoppingHeaderButton"
+                aria-label="Ma liste de courses"
+                title="Ma liste de courses"
+            >
+                <span class="shopping-header-icon">🛒</span>
+
+                <span
+                    id="shoppingBadge"
+                    class="shopping-badge"
+                    hidden
+                >
+                    0
+                </span>
+            </a>
+
+
+            <!-- NOTIFICATIONS -->
+
+            <a
+                href="./notifications.html"
+                class="notification-button"
+                id="notificationButton"
+                aria-label="Notifications"
+            >
+
+                <span class="notification-bell">
+                    🔔
+                </span>
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                >
+                    0
+                </span>
+
+            </a>
+
+
+            <!-- UTILISATEUR -->
+
+            <div class="user-auth">
+
+                <a
+                    href="./mon-compte.html"
+                    id="accountButton"
+                    class="account-button"
+                >
+
+                    <img
+                        src="../image/user.png"
+                        alt=""
+                        class="account-icon"
+                    >
+
+                    <span id="userName"></span>
+
+                </a>
+
+
+                <a
+                    href="./connexion.html"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    Se connecter
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLOGAN -->
+
+        <div class="header-text">
+
+            <p>Cuisiner 🤍</p>
+            <p>Partager</p>
+            <p>Se régaler !</p>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- ==========================================
+         PAGE SCANNER
+    =========================================== -->
+
+    <main class="scanner-page">
+
+
+        <!-- ======================================
+             INTRODUCTION
+        ======================================= -->
+
+        <section class="scanner-header">
+
+            <span class="scanner-small-title">
+                Recette Plus
+            </span>
+
+            <h1>
+                Scanner une recette
+            </h1>
+
+            <p>
+                Photographiez une recette écrite
+                ou imprimée.
+                L'IA de Recette Plus la transformera
+                automatiquement en recette numérique.
+            </p>
+
+        </section>
+
+
+
+        <!-- ======================================
+             ZONE APPAREIL PHOTO
+        ======================================= -->
+
+        <section class="scanner-card">
+
+
+            <div
+                class="scanner-camera"
+                id="scannerCamera"
+            >
+
+                <div class="scanner-camera-icon">
+                    📷
+                </div>
+
+
+                <h2>
+                    Photographiez votre recette
+                </h2>
+
+
+                <p>
+                    Posez la feuille à plat et assurez-vous
+                    que toute la recette soit visible.
+                </p>
+
+
+                <!-- APPAREIL PHOTO -->
+
+                <input
+                    type="file"
+                    id="recipePhoto"
+                    accept="image/*"
+                    capture="environment"
+                    hidden
+                >
+
+
+                <button
+                    type="button"
+                    class="scanner-photo-button"
+                    id="takeRecipePhoto"
+                >
+                    📷 Prendre une photo
+                </button>
+
+
+                <!-- GALERIE -->
+
+                <button
+                    type="button"
+                    class="scanner-gallery-button"
+                    id="chooseRecipePhoto"
+                >
+                    🖼️ Choisir une photo
+                </button>
+
+
+                <input
+                    type="file"
+                    id="recipeGallery"
+                    accept="image/*"
+                    hidden
+                >
+
+            </div>
+
+
+
+            <!-- ==================================
+                 APERÇU PHOTO
+            =================================== -->
+
+            <div
+                class="scanner-preview"
+                id="scannerPreview"
+                hidden
+            >
+
+                <span class="scanner-preview-label">
+                    Photo de votre recette
+                </span>
+
+
+                <div class="scanner-image-wrapper">
+
+                    <img
+                        id="recipePhotoPreview"
+                        alt="Aperçu de la recette photographiée"
+                    >
+
+                </div>
+
+
+                <div class="scanner-preview-actions">
+
+
+                    <button
+                        type="button"
+                        class="scanner-change-button"
+                        id="changeRecipePhoto"
+                    >
+                        ↻ Reprendre la photo
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="scanner-analyse-button"
+                        id="analyseRecipePhoto"
+                    >
+                        ✨ Lire cette recette avec l'IA
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ======================================
+             RÉSULTAT / CORRECTION
+        ======================================= -->
+
+        <div
+            class="scanner-message"
+            id="scannerMessage"
+        ></div>
+
+
+    </main>
+
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <h2>
+                    Recette Plus
+                </h2>
+
+                <p>
+                    Cuisiner, partager, se régaler.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="../index.html">
+                    Accueil
+                </a>
+
+                <a href="./mes-recettes.html">
+                    Mes recettes
+                </a>
+
+                <a href="./favoris.html">
+                    Favoris
+                </a>
+
+                <a href="./creer-recette.html">
+                    Créer une recette
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Recette Plus
+            </p>
+
+            <p>
+                Site créé et réalisé par
+                <a href="#">
+                    MND3V
+                </a>
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ==========================================
+         SCRIPTS
+    =========================================== -->
+
+
+    <!-- SUPABASE -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+    <!-- CONFIGURATION SUPABASE -->
+
+    <script src="../js/supabase.js"></script>
+
+
+    <!-- PROTECTION DE LA PAGE -->
+
+    <script src="../js/protected-page.js"></script>
+
+
+    <!-- NOTIFICATIONS DU HEADER -->
+
+    <script src="../js/notifications-header.js"></script>
+
+
+    <!-- COMPTE UTILISATEUR DU HEADER -->
+
+    <script src="../js/auth-header.js"></script>
+
+    <script src="../js/shopping-header.js"></script>
+
+    <!-- MENU MOBILE -->
+
+    <script src="../js/mobile-menu.js"></script>
+
+    <!-- SCANNER -->
+
+    <script src="../js/scanner-recette.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Mot de passe oublié | Recette Plus
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+            <a
+                href="../index.html"
+                class="auth-logo"
+            >
+                Recette Plus
+            </a>
+
+
+            <h1>
+                Mot de passe oublié
+            </h1>
+
+
+            <p class="auth-intro">
+                Indiquez l'adresse e-mail associée à votre compte.
+                Vous recevrez un lien pour choisir un nouveau mot de passe.
+            </p>
+
+
+            <form id="resetForm">
+
+                <div class="form-group">
+
+                    <label for="resetEmail">
+                        Adresse e-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="resetEmail"
+                        placeholder="exemple@email.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-button"
+                    id="resetButton"
+                >
+                    Envoyer le lien de réinitialisation
+                </button>
+
+
+                <div
+                    id="resetMessage"
+                    class="auth-message"
+                    aria-live="polite"
+                ></div>
+
+            </form>
+
+
+            <p class="auth-switch">
+
+                Vous connaissez votre mot de passe ?
+
+                <a href="./connexion.html">
+                    Retour à la connexion
+                </a>
+
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/mot-de-passe-oublie.js"></script>
+
+</body>
+
+</html>

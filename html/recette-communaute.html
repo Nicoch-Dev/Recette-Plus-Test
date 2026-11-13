@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Recette communauté | Recette Plus</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <img
+                    src="../image/logo.PNG"
+                    alt="Logo Recette Plus"
+                >
+
+            </a>
+
+        </div>
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+
+        <nav class="navigation">
+
+            <a href="../index.html">
+                Accueil
+            </a>
+
+            <a href="#">
+                Recettes
+            </a>
+
+            <a href="../html/planning.html">
+                Planning
+            </a>
+
+            <a href="./ia-recette.html">
+                IA Culinaire
+            </a>
+
+            <a href="./mes-recettes.html">
+                Mes recettes
+            </a>
+
+            <a href="./favoris.html">
+                Favoris
+            </a>
+
+            <a
+                href="./communaute.html"
+                class="active"
+            >
+                Communauté
+            </a>
+
+        </nav>
+
+
+        <div class="icons">
+
+            <a
+                href="./liste-courses.html"
+                class="shopping-header-button"
+                id="shoppingHeaderButton"
+                aria-label="Ma liste de courses"
+                title="Ma liste de courses"
+            >
+                <span class="shopping-header-icon">🛒</span>
+
+                <span
+                    id="shoppingBadge"
+                    class="shopping-badge"
+                    hidden
+                >
+                    0
+                </span>
+            </a>
+
+            <a
+                href="./notifications.html"
+                class="notification-button"
+                id="notificationButton"
+                aria-label="Notifications"
+            >
+                <span class="notification-bell">
+                    🔔
+                </span>
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                >
+                    0
+                </span>
+            </a>
+
+            <div class="user-auth">
+
+                <a
+                    href="./mon-compte.html"
+                    id="accountButton"
+                    class="account-button"
+                >
+
+                    <img
+                        src="../image/user.png"
+                        alt=""
+                        class="account-icon"
+                    >
+
+                    <span id="userName"></span>
+
+                </a>
+
+
+                <a
+                    href="./connexion.html"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    Se connecter
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="community-recipe-page">
+
+        <section
+            id="communityRecipeDetails"
+            class="recipe-details"
+        >
+
+            <p class="loading">
+                Chargement de la recette...
+            </p>
+
+        </section>
+
+
+        <section class="comments-section">
+
+            <div class="comments-header">
+
+                <h2>
+                    Commentaires
+                </h2>
+
+                <span id="commentsCount">
+                    0 commentaire
+                </span>
+
+            </div>
+
+
+            <form
+                id="commentForm"
+                class="comment-form"
+            >
+
+                <textarea
+                    id="commentContent"
+                    rows="4"
+                    placeholder="Écrire un commentaire..."
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="comment-submit-button"
+                >
+                    Publier
+                </button>
+
+            </form>
+
+
+            <div
+                id="commentsList"
+                class="comments-list"
+            >
+
+                <p class="loading">
+                    Chargement des commentaires...
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <h2>
+                    Recette Plus
+                </h2>
+
+                <p>
+                    Cuisiner, partager, se régaler.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="../index.html">
+                    Accueil
+                </a>
+
+                <a href="./mes-recettes.html">
+                    Mes recettes
+                </a>
+
+                <a href="./favoris.html">
+                    Favoris
+                </a>
+
+                <a href="./communaute.html">
+                    Communauté
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/protected-page.js"></script>
+
+    <script src="../js/notifications-header.js"></script>
+
+    <script src="../js/auth-header.js"></script>
+
+    <script src="../js/shopping-header.js"></script>
+
+    <script src="../js/mobile-menu.js"></script>
+
+    <script src="../js/recette-communaute.js"></script>
+
+</body>
+
+</html>

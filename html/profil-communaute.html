@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Profil | Recette Plus</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <img
+                    src="../image/logo.PNG"
+                    alt="Logo Recette Plus"
+                >
+
+            </a>
+
+        </div>
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navigation">
+
+            <a href="../index.html">
+                Accueil
+            </a>
+
+            <a href="./ia-recette.html">
+                IA Culinaire
+            </a>
+
+            <a href="./mes-recettes.html">
+                Mes recettes
+            </a>
+
+            <a href="./favoris.html">
+                Favoris
+            </a>
+
+            <a
+                href="./communaute.html"
+                class="active"
+            >
+                Communauté
+            </a>
+
+        </nav>
+
+
+        <div class="user-auth">
+
+            <a
+                href="./mon-compte.html"
+                id="accountButton"
+                class="account-button"
+            >
+
+                <img
+                    src="../image/user.png"
+                    alt=""
+                    class="account-icon"
+                >
+
+                <span id="userName"></span>
+
+            </a>
+
+
+            <a
+                href="./connexion.html"
+                id="loginButton"
+                class="login-button"
+            >
+                Se connecter
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="public-profile-page">
+
+        <!-- PROFIL -->
+        <section
+            id="publicProfile"
+            class="public-profile-header"
+        >
+
+            <p class="loading">
+                Chargement du profil...
+            </p>
+
+        </section>
+
+
+        <!-- ABONNEMENT -->
+        <div class="follow-zone">
+
+            <button
+                type="button"
+                id="followButton"
+                class="follow-button"
+            >
+                Suivre
+            </button>
+
+
+            <div class="follow-stats">
+
+                <button
+                    type="button"
+                    id="followersButton"
+                    class="follow-stat-button"
+                >
+
+                    <strong id="followersCount">
+                        0
+                    </strong>
+
+                    <span>
+                        abonnés
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="followingButton"
+                    class="follow-stat-button"
+                >
+
+                    <strong id="followingCount">
+                        0
+                    </strong>
+
+                    <span>
+                        abonnements
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECETTES -->
+        <section class="public-profile-recipes">
+
+            <h2>
+                Recettes partagées
+            </h2>
+
+
+            <div
+                id="profileRecipes"
+                class="community-recipes"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ======================================
+         FENÊTRE ABONNÉS / ABONNEMENTS
+    ======================================= -->
+
+    <div
+        id="followModal"
+        class="follow-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="follow-modal-overlay"
+            id="followModalOverlay"
+        ></div>
+
+
+        <div
+            class="follow-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="followModalTitle"
+        >
+
+            <div class="follow-modal-header">
+
+                <h2 id="followModalTitle">
+                    Membres
+                </h2>
+
+
+                <button
+                    type="button"
+                    id="closeFollowModal"
+                    class="follow-modal-close"
+                    aria-label="Fermer"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                id="followMembersList"
+                class="follow-members-list"
+            >
+
+                <p class="loading">
+                    Chargement...
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/protected-page.js"></script>
+
+    <script src="../js/auth-header.js"></script>
+
+    <script src="../js/mobile-menu.js"></script>
+
+    <script src="../js/profil-communaute.js"></script>
+
+</body>
+
+</html>

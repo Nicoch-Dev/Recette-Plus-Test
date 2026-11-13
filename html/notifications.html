@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Notifications | Recette Plus</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <img
+                    src="../image/logo.PNG"
+                    alt="Logo Recette Plus"
+                >
+
+            </a>
+
+        </div>
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+
+        <nav class="navigation">
+
+            <a href="../index.html">
+                Accueil
+            </a>
+
+            <a href="./ia-recette.html">
+                IA Culinaire
+            </a>
+
+            <a href="./mes-recettes.html">
+                Mes recettes
+            </a>
+
+            <a href="./favoris.html">
+                Favoris
+            </a>
+
+            <a href="./communaute.html">
+                Communauté
+            </a>
+
+        </nav>
+
+
+        <div class="icons">
+
+            <a
+                href="./notifications.html"
+                class="notification-button"
+                id="notificationButton"
+                aria-label="Notifications"
+            >
+                <span class="notification-bell">
+                    🔔
+                </span>
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                >
+                    0
+                </span>
+            </a>
+
+
+            <div class="user-auth">
+
+                <a
+                    href="./mon-compte.html"
+                    id="accountButton"
+                    class="account-button"
+                >
+
+                    <img
+                        src="../image/user.png"
+                        alt=""
+                        class="account-icon"
+                    >
+
+                    <span id="userName"></span>
+
+                </a>
+
+
+                <a
+                    href="./connexion.html"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    Se connecter
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="notifications-page">
+
+        <section class="notifications-header">
+
+            <h1>
+                Notifications
+            </h1>
+
+            <button
+                type="button"
+                id="markAllReadButton"
+                class="mark-all-read-button"
+            >
+                Tout marquer comme lu
+            </button>
+
+        </section>
+
+
+        <section
+            id="notificationsList"
+            class="notifications-list"
+        >
+
+            <p class="loading">
+                Chargement des notifications...
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/protected-page.js"></script>
+
+    <script src="../js/notifications-header.js"></script>
+
+    <script src="../js/auth-header.js"></script>
+
+    <script src="../js/mobile-menu.js"></script>
+
+    <script src="../js/notifications.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Défi du Frigo | Recette Plus</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+
+        <div class="logo">
+
+            <img src="../image/logo.PNG" alt="Logo Recette plus">
+
+        </div>
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navigation">
+
+            <a href="../index.html">Accueil</a>
+            <a href="./planning.html">Planning</a>
+            <a href="../html/ia-recette.html">IA Culinaire</a>
+            <a href="../html/mes-recettes.html">Mes recettes</a>
+            <a href="../html/favoris.html">Favoris</a>
+            <a href="../html/communaute.html">Communauté</a>
+
+        </nav>
+
+        <div class="icons">
+
+            <a
+                href="./liste-courses.html"
+                class="shopping-header-button"
+                id="shoppingHeaderButton"
+                aria-label="Ma liste de courses"
+                title="Ma liste de courses"
+            >
+                <span class="shopping-header-icon">🛒</span>
+
+                <span
+                    id="shoppingBadge"
+                    class="shopping-badge"
+                    hidden
+                >
+                    0
+                </span>
+            </a>
+
+            <a
+                href="./notifications.html"
+                class="notification-button"
+                id="notificationButton"
+                aria-label="Notifications"
+            >
+                <span class="notification-bell">
+                    🔔
+                </span>
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                >
+                    0
+                </span>
+            </a>
+
+            <div class="user-auth">
+
+                <a
+                    href="./mon-compte.html"
+                    id="accountButton"
+                    class="account-button"
+                >
+
+                <img
+                    src="../image/user.png"
+                    alt=""
+                    class="account-icon"
+                >
+
+                <span id="userName"></span>
+
+                </a>
+
+                <a
+                    href="#"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    Se connecter
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="header-text">
+
+            <p>Cuisiner 🤍</p>
+            <p>Partager</p>
+            <p>Se régaler !</p>
+
+        </div>
+
+    </header>
+
+    <main class="ai-page">
+        <section class="ai-generator">
+            <div class="ai-generator-header">
+                <div class="ai-big-icon">🧊</div>
+                <h1>Le Défi du Frigo</h1>
+                <p>Transformez les ingrédients de votre frigo et de vos placards en délicieux repas !</p>
+                <p>2 jours, jusqu'à 4 recettes, et seulement 2 crédits IA.</p>
+            </div>
+
+            <form id="fridgeChallengeForm" class="ai-form">
+                <!-- Import des photos : reconnaissance IA à connecter à l'étape suivante -->
+                <section class="fridge-photo-section" aria-labelledby="fridgePhotoTitle">
+                    <h2 id="fridgePhotoTitle">📸 Scanner mes ingrédients</h2>
+                    <p>Photographiez votre frigo ou vos placards, ou choisissez une image depuis votre appareil.</p>
+                    <div class="fridge-photo-actions">
+                        <label for="fridgeCameraInput" class="fridge-photo-action">📷 Prendre une photo</label>
+                        <input id="fridgeCameraInput" type="file" accept="image/*" capture="environment" hidden>
+                        <label for="fridgeFileInput" class="fridge-photo-action">🖼️ Importer une image</label>
+                        <input id="fridgeFileInput" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+                    </div>
+                    <p class="fridge-photo-hint">Vous pouvez sélectionner plusieurs photos. Vérifiez toujours les ingrédients et les quantités avant de lancer le défi.</p>
+                    <div id="fridgePhotoPreview" class="fridge-photo-preview" aria-live="polite"></div>
+                    <p id="fridgePhotoStatus" role="status" aria-live="polite">La reconnaissance automatique des ingrédients sera activée prochainement. Pour l'instant, renseignez les ingrédients manuellement ci-dessous.</p>
+                </section>
+                <div class="form-group">
+                    <label for="fridgeIngredients">Mes ingrédients disponibles</label>
+                    <textarea id="fridgeIngredients" rows="5" placeholder="Exemple : 4 pommes de terre, 3 courgettes, 6 œufs, 200 g de riz..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="fridgeServings">Pour combien de personnes ?</label>
+                    <input type="number" id="fridgeServings" min="1" max="12" value="2" required>
+                </div>
+
+                <h2>Choisissez votre défi</h2>
+                <p class="fridge-mode-intro">Préférez-vous cuisiner uniquement avec ce que vous avez, ou accepter quelques achats supplémentaires ?</p>
+
+                <div class="fridge-mode-options">
+                    <label class="fridge-mode-option">
+                        <input type="radio" name="fridgeMode" value="zero_achat" checked>
+                        <span>
+                            <strong>🥕 Zéro achat</strong>
+                            <small>Je cuisine uniquement avec ce que j'ai.</small>
+                        </span>
+                    </label>
+                    <label class="fridge-mode-option">
+                        <input type="radio" name="fridgeMode" value="courses_minimales">
+                        <span>
+                            <strong>🛒 Quelques achats</strong>
+                            <small>J'accepte quelques ingrédients supplémentaires.</small>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="fridgePreferences">Vos préférences alimentaires (facultatif)</label>
+                    <textarea id="fridgePreferences" rows="3" placeholder="Exemple : cuisine familiale, sans lactose, recettes rapides..."></textarea>
+                </div>
+
+                <button type="button" id="fridgeGenerateButton" class="ai-submit-button" disabled>
+                    🧊 Lancer mon défi — 2 crédits
+                </button>
+                <p id="fridgeStatus" role="status" aria-live="polite">Fonction disponible uniquement pour les comptes de test pendant les vérifications.</p>
+            </form>
+            <div id="fridgeResult" class="ai-result" aria-live="polite"></div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+
+    <div class="footer-container">
+
+        <div class="footer-brand">
+
+            <h2>
+                Recette Plus
+            </h2>
+
+            <p>
+                Cuisiner, partager, se régaler.
+            </p>
+
+        </div>
+
+        <div class="footer-links">
+
+            <a href="../index.html">
+                Accueil
+            </a>
+
+            <a href="../html/mes-recettes.html">
+                Mes recettes
+            </a>
+
+            <a href="../html/favoris.html">
+                Favoris
+            </a>
+
+            <a href="../html/creer-recette.html">
+                Créer une recette
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Recette Plus
+        </p>
+
+        <p>
+            Site créer et réaliser par <a href="#">MND3V</a>
+        </p>
+
+    </div>
+
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/protected-page.js"></script>
+    <script src="../js/notifications-header.js"></script>
+    <script src="../js/auth-header.js"></script>
+    <script src="../js/shopping-header.js"></script>
+    <script src="../js/mobile-menu.js"></script>
+    <script src="../js/defi-frigo.js"></script>
+    <script src="../js/defi-frigo-photos.js"></script>
+</body>
+</html>

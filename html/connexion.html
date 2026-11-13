@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Connexion | Recette Plus</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+            <a
+                href="../index.html"
+                class="auth-logo"
+            >
+                Recette Plus
+            </a>
+
+            <h1>
+                Se connecter
+            </h1>
+
+            <p class="auth-intro">
+                Connectez-vous pour retrouver vos recettes.
+            </p>
+
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="loginEmail">
+                        Adresse e-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="exemple@email.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="loginPassword">
+                        Mot de passe
+                    </label>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Votre mot de passe"
+                        required
+                    >
+
+                </div>
+
+                <p class="forgot-password">
+                    <a href="./mot-de-passe-oublie.html">
+                        Mot de passe oublié ?
+                    </a>
+                </p>
+
+
+                <button
+                    type="submit"
+                    class="auth-button"
+                    id="loginButton"
+                >
+                    Se connecter
+                </button>
+
+
+                <div
+                    id="loginMessage"
+                    class="auth-message"
+                ></div>
+
+            </form>
+
+
+            <p class="auth-switch">
+
+                Pas encore de compte ?
+
+                <a href="./inscription.html">
+                    Créer un compte
+                </a>
+
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/connexion.js"></script>
+
+</body>
+
+</html>

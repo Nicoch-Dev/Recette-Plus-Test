@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Créer un compte | Recette Plus</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+            <a
+                href="../index.html"
+                class="auth-logo"
+            >
+                Recette Plus
+            </a>
+
+
+            <h1>
+                Créer mon compte
+            </h1>
+
+            <p class="auth-intro">
+                Créez votre compte pour retrouver
+                vos recettes sur tous vos appareils.
+            </p>
+
+
+            <form id="signupForm">
+
+                <!-- NOM -->
+
+                <div class="form-group">
+
+                    <label for="signupName">
+                        Prénom
+                    </label>
+
+                    <input
+                        type="text"
+                        id="signupName"
+                        placeholder="Votre prénom"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="signupEmail">
+                        Adresse e-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="signupEmail"
+                        placeholder="exemple@email.com"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- MOT DE PASSE -->
+
+                <div class="form-group">
+
+                    <label for="signupPassword">
+                        Mot de passe
+                    </label>
+
+                    <input
+                        type="password"
+                        id="signupPassword"
+                        placeholder="Minimum 6 caractères"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CONFIRMATION -->
+
+                <div class="form-group">
+
+                    <label for="signupPasswordConfirm">
+                        Confirmer le mot de passe
+                    </label>
+
+                    <input
+                        type="password"
+                        id="signupPasswordConfirm"
+                        placeholder="Retapez votre mot de passe"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-button"
+                    id="signupButton"
+                >
+                    Créer mon compte
+                </button>
+
+
+                <div
+                    id="signupMessage"
+                    class="auth-message"
+                ></div>
+
+            </form>
+
+
+            <p class="auth-switch">
+
+                Vous avez déjà un compte ?
+
+                <a href="./connexion.html">
+                    Se connecter
+                </a>
+
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/inscription.js"></script>
+
+</body>
+
+</html>

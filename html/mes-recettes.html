@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mes recettes | Recette Plus</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <img src="../image/logo.PNG" alt="Logo Recette plus">
+
+        </div>
+
+        <button type="button" class="mobile-menu-button" id="mobileMenuButton" aria-label="Ouvrir le menu"
+            aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navigation">
+
+            <a href="../index.html">Accueil</a>
+            <a href="../html/ia-recette.html">IA Culinaire</a>
+            <a href="../html/mes-recettes.html" class="active">Mes recettes</a>
+            <a href="../html/favoris.html">Favoris</a>
+            <a href="../html/communaute.html">Communauté</a>
+
+        </nav>
+
+        <div class="icons">
+
+            <a href="./liste-courses.html" class="shopping-header-button" id="shoppingHeaderButton"
+                aria-label="Ma liste de courses" title="Ma liste de courses">
+                <span class="shopping-header-icon">🛒</span>
+
+                <span id="shoppingBadge" class="shopping-badge" hidden>
+                    0
+                </span>
+            </a>
+
+            <a href="./notifications.html" class="notification-button" id="notificationButton"
+                aria-label="Notifications">
+                <span class="notification-bell">
+                    🔔
+                </span>
+
+                <span id="notificationBadge" class="notification-badge">
+                    0
+                </span>
+            </a>
+
+            <div class="user-auth">
+
+                <a href="./mon-compte.html" id="accountButton" class="account-button">
+
+                    <img src="../image/user.png" alt="" class="account-icon">
+
+                    <span id="userName"></span>
+
+                </a>
+
+                <a href="#" id="loginButton" class="login-button">
+                    Se connecter
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="header-text">
+
+            <p>Cuisiner 🤍</p>
+            <p>Partager</p>
+            <p>Se régaler !</p>
+
+        </div>
+
+    </header>
+
+    <main class="personal-recipes-page">
+
+        <div class="personal-recipes-header">
+
+            <h1 id="recipesTitle">
+                Mes recettes
+            </h1>
+
+            <a href="../html/creer-recette.html" class="recipe-button">
+                + Créer une recette
+            </a>
+
+        </div>
+
+        <div class="recipes-search">
+
+            <input type="search" id="recipeSearch" placeholder="🔍 Rechercher une recette..."
+                aria-label="Rechercher dans mes recettes" autocomplete="off">
+
+        </div>
+
+        <div id="categoryNavigation"></div>
+
+        <!-- ==================================
+        FILTRES DES CATÉGORIES
+        ================================== -->
+
+        <div id="recipeCategoryFilters" class="recipe-category-filters"></div>
+
+        <!-- ==================================
+        GESTION DES CATÉGORIES
+        ================================== -->
+
+        <div class="recipe-category-management">
+
+            <button type="button" id="manageRecipeCategories" class="manage-category-button">
+                ⚙️ Gérer mes catégories
+            </button>
+
+        </div>
+
+        <!-- ==================================
+            PANNEAU DE GESTION DES CATÉGORIES
+        ================================== -->
+
+        <section id="categoryManagementPanel" class="category-management-panel" hidden>
+
+            <div class="category-management-header">
+
+                <h3>Mes catégories personnalisées</h3>
+
+                <button type="button" id="closeCategoryManagement" class="close-category-management"
+                    aria-label="Fermer la gestion des catégories" title="Fermer">
+                    &times;
+                </button>
+
+            </div>
+
+            <div id="categoryManagementList"></div>
+
+        </section>
+
+        <div id="personalRecipes" class="results"></div>
+
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <h2>
+                    Recette Plus
+                </h2>
+
+                <p>
+                    Cuisiner, partager, se régaler.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <a href="../index.html">
+                    Accueil
+                </a>
+
+                <a href="../html/mes-recettes.html">
+                    Mes recettes
+                </a>
+
+                <a href="../html/favoris.html">
+                    Favoris
+                </a>
+
+                <a href="../html/creer-recette.html">
+                    Créer une recette
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Recette Plus
+            </p>
+
+            <p>
+                Site créer et réaliser par <a href="#">MND3V</a>
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/protected-page.js"></script>
+
+    <script src="../js/notifications-header.js"></script>
+
+    <script src="../js/auth-header.js"></script>
+
+    <script src="../js/shopping-header.js"></script>
+
+    <script src="../js/mobile-menu.js"></script>
+
+    <script src="../js/mes-recettes.js"></script>
+
+
+</body>
+
+</html>

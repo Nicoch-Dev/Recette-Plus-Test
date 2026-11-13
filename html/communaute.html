@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Communauté | Recette Plus</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <img
+                    src="../image/logo.PNG"
+                    alt="Logo Recette Plus"
+                >
+
+            </a>
+
+        </div>
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Ouvrir le menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navigation">
+
+            <a href="../index.html">
+                Accueil
+            </a>
+
+            <a href="#">
+                Recettes
+            </a>
+
+            <a href="../html/planning.html">
+                Planning
+            </a>
+
+            <a href="./ia-recette.html">
+                IA Culinaire
+            </a>
+
+            <a href="./mes-recettes.html">
+                Mes recettes
+            </a>
+
+            <a href="./favoris.html">
+                Favoris
+            </a>
+
+            <a
+                href="./communaute.html"
+                class="active"
+            >
+                Communauté
+            </a>
+
+        </nav>
+
+
+        <div class="icons">
+
+            <a
+                href="./liste-courses.html"
+                class="shopping-header-button"
+                id="shoppingHeaderButton"
+                aria-label="Ma liste de courses"
+                title="Ma liste de courses"
+            >
+                <span class="shopping-header-icon">🛒</span>
+
+                <span
+                    id="shoppingBadge"
+                    class="shopping-badge"
+                    hidden
+                >
+                    0
+                </span>
+            </a>
+
+            <a
+                href="./notifications.html"
+                class="notification-button"
+                id="notificationButton"
+                aria-label="Notifications"
+            >
+                <span class="notification-bell">
+                    🔔
+                </span>
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                >
+                    0
+                </span>
+            </a>
+
+            <div class="user-auth">
+
+                <a
+                    href="./mon-compte.html"
+                    id="accountButton"
+                    class="account-button"
+                >
+
+                    <img
+                        src="../image/user.png"
+                        alt=""
+                        class="account-icon"
+                    >
+
+                    <span id="userName"></span>
+
+                </a>
+
+
+                <a
+                    href="./connexion.html"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    Se connecter
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-text">
+
+            <p>Cuisiner 🤍</p>
+            <p>Partager</p>
+            <p>Se régaler !</p>
+
+        </div>
+
+    </header>
+
+
+    <main class="community-page">
+
+        <section class="community-hero">
+
+            <span class="community-small-title">
+                Recette Plus
+            </span>
+
+            <h1>
+                La communauté
+            </h1>
+
+            <p>
+                Découvrez les recettes partagées
+                par les membres de Recette Plus.
+            </p>
+
+        </section>
+
+        <div class="community-stats">
+
+            <div class="community-stat">
+                <strong id="membersCount">0</strong>
+                <span>Membres</span>
+            </div>
+
+            <div class="community-stat">
+                <strong id="onlineCount">0</strong>
+                <span>En ligne</span>
+            </div>
+
+        </div>
+
+        <section class="community-members">
+
+            <div class="community-members-header">
+
+                <div>
+                    <span class="community-small-title">
+                        Les cuisiniers
+                    </span>
+
+                    <h2>
+                        Membres à découvrir
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div
+                id="suggestedMembers"
+                class="suggested-members"
+            >
+
+                <p class="loading">
+                    Chargement des membres...
+                </p>
+
+            </div>
+
+        </section>
+
+        <div class="community-tabs">
+
+            <button
+                type="button"
+                id="allRecipesTab"
+                class="community-tab active"
+            >
+                Toutes les recettes
+            </button>
+
+            <button
+                type="button"
+                id="followingRecipesTab"
+                class="community-tab"
+            >
+                Mes abonnements
+            </button>
+
+            <button
+                type="button"
+                id="feedTab"
+                class="community-tab"
+            >
+                Fil d'actualité
+            </button>
+
+            <a
+                href="./groupes.html"
+                class="community-tab community-groups-link"
+            >
+                Groupes
+            </a>
+
+        </div>
+
+        <div class="community-filters">
+
+            <input
+                type="search"
+                id="communitySearch"
+                placeholder="Rechercher une recette..."
+            >
+
+            <select id="communityCategory">
+
+                <option value="">
+                    Toutes les catégories
+                </option>
+
+                <option value="Entrée">
+                    Entrées
+                </option>
+
+                <option value="Plat">
+                    Plats
+                </option>
+
+                <option value="Dessert">
+                    Desserts
+                </option>
+
+                <option value="Apéritif">
+                    Apéritifs
+                </option>
+
+                <option value="Boisson">
+                    Boissons
+                </option>
+
+            </select>
+
+            <select id="communitySort">
+
+                <option value="recent">
+                    Plus récentes
+                </option>
+
+                <option value="likes">
+                    Plus aimées
+                </option>
+
+                <option value="comments">
+                    Plus commentées
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <section class="community-content">
+
+            <div
+                id="communityRecipes"
+                class="community-recipes"
+            >
+
+                <p class="loading">
+                    Chargement des recettes...
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <h2>
+                    Recette Plus
+                </h2>
+
+                <p>
+                    Cuisiner, partager, se régaler.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="../index.html">
+                    Accueil
+                </a>
+
+                <a href="./mes-recettes.html">
+                    Mes recettes
+                </a>
+
+                <a href="./favoris.html">
+                    Favoris
+                </a>
+
+                <a href="./communaute.html">
+                    Communauté
+                </a>
+
+                <a href="./creer-recette.html">
+                    Créer une recette
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Recette Plus
+            </p>
+
+            <p>
+                Site créé et réalisé par
+                <a href="#">MND3V</a>
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="../js/supabase.js"></script>
+
+    <script src="../js/notifications-header.js"></script>
+
+    <script src="../js/protected-page.js"></script>
+
+    <script src="../js/auth-header.js"></script>
+
+    <script src="../js/shopping-header.js"></script>
+
+    <script src="../js/mobile-menu.js"></script>
+
+    <script src="../js/communaute.js"></script>
+
+</body>
+
+</html>
