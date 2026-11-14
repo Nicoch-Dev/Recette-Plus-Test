@@ -150,7 +150,7 @@ function displayGroupRecipe(recipe) {
 
                 <div class="recipe-meta">
                     ${recipe.time ? `<span>⏱ ${escapeHTML(recipe.time)}</span>` : ""}
-                    ${recipe.servings ? `<span>👥 ${escapeHTML(recipe.servings)} personnes</span>` : ""}
+                    ${recipe.servings ? `<span>👥 ${escapeHTML(recipe.servings)} </span>` : ""}
                 </div>
 
                 <div class="community-like-zone">
