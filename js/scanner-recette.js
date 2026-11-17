@@ -1,33 +1,97 @@
-// Vérification préventive : la limite reste appliquée par Supabase.
+
+// ==========================================
+// RECETTE PLUS — SCANNER DE RECETTES
+// ==========================================
+
+
+// ==========================================
+// VÉRIFICATION CAPACITÉ DU CARNET
+// ==========================================
+
 async function checkAICarnetCapacity(userId) {
+
     const [profile, billing, recipes] = await Promise.all([
-        supabaseClient.from("profiles").select("is_test_account").eq("id", userId).single(),
-        supabaseClient.from("user_billing").select("plan, has_purchased_pack").eq("user_id", userId).single(),
-        supabaseClient.from("recipes").select("id", { count: "exact", head: true }).eq("user_id", userId)
+
+        supabaseClient
+            .from("profiles")
+            .select("is_test_account")
+            .eq("id", userId)
+            .single(),
+
+        supabaseClient
+            .from("user_billing")
+            .select("plan, has_purchased_pack")
+            .eq("user_id", userId)
+            .single(),
+
+        supabaseClient
+            .from("recipes")
+            .select("id", { count: "exact", head: true })
+            .eq("user_id", userId)
+
     ]);
 
-    // Si une lecture échoue, ne pas bloquer à tort : le trigger SQL tranche.
-    if (profile.error || billing.error || recipes.error || recipes.count === null) {
-        console.warn("Pré-vérification du carnet indisponible", profile.error, billing.error, recipes.error);
+    if (
+        profile.error ||
+        billing.error ||
+        recipes.error ||
+        recipes.count === null
+    ) {
+
+        console.warn(
+            "Pré-vérification du carnet indisponible",
+            profile.error,
+            billing.error,
+            recipes.error
+        );
+
         return null;
     }
-    if (profile.data.is_test_account === true || billing.data.plan === "premium") return null;
-    const limit = billing.data.has_purchased_pack ? 30 : 10;
+
+    if (
+        profile.data.is_test_account === true ||
+        billing.data.plan === "premium"
+    ) {
+        return null;
+    }
+
+    const limit =
+        billing.data.has_purchased_pack ? 30 : 10;
+
     return recipes.count >= limit ? limit : null;
 }
 
+
 function aiCarnetFullMessage(limit) {
+
     if (limit === 30) {
-        return "Votre carnet est plein (30 recettes sur 30). Passez à Premium pour un carnet illimité ou supprimez une recette pour libérer une place.";
+
+        return (
+            "Votre carnet est plein (30 recettes sur 30). " +
+            "Passez à Premium pour un carnet illimité " +
+            "ou supprimez une recette pour libérer une place."
+        );
     }
+
     if (limit === 10) {
-        return "Votre carnet est plein (10 recettes sur 10). Achetez un pack de crédits pour passer à 30 recettes, choisissez Premium ou supprimez une recette.";
+
+        return (
+            "Votre carnet est plein (10 recettes sur 10). " +
+            "Achetez un pack de crédits pour passer à 30 recettes, " +
+            "choisissez Premium ou supprimez une recette."
+        );
     }
-    return "Votre carnet de recettes est plein. Supprimez une recette pour libérer une place ou consultez les offres disponibles.";
+
+    return (
+        "Votre carnet de recettes est plein. " +
+        "Supprimez une recette pour libérer une place " +
+        "ou consultez les offres disponibles."
+    );
 }
 
+
 // ==========================================
-// ÉLÉMENTS
+// ÉLÉMENTS HTML
 // ==========================================
 
 const recipePhoto =
@@ -69,6 +133,7 @@ let selectedRecipePhoto = null;
 
 let currentPreviewURL = null;
 
+
 // ==========================================
 // PROTECTION CONTRE LES DOUBLES SCANS
 // ==========================================
@@ -76,19 +141,27 @@ let currentPreviewURL = null;
 const SCAN_REQUEST_STORAGE_KEY =
     "recetteplus_pending_scan_request";
 
+
 function getScanPhotoSignature(file) {
+
     return JSON.stringify({
+
         name: file.name,
         size: file.size,
         type: file.type,
         lastModified: file.lastModified
+
     });
 }
 
+
 function getOrCreateScanRequestId(file) {
-    const signature = getScanPhotoSignature(file);
+
+    const signature =
+        getScanPhotoSignature(file);
 
     try {
+
         const saved = JSON.parse(
             sessionStorage.getItem(
                 SCAN_REQUEST_STORAGE_KEY
@@ -100,29 +173,37 @@ function getOrCreateScanRequestId(file) {
             saved.signature === signature &&
             typeof saved.requestId === "string"
         ) {
+
             return saved.requestId;
         }
+
     } catch (error) {
+
         console.warn(
             "Ancienne demande de scan illisible :",
             error
         );
     }
 
-    const requestId = crypto.randomUUID();
+    const requestId =
+        crypto.randomUUID();
 
     sessionStorage.setItem(
         SCAN_REQUEST_STORAGE_KEY,
         JSON.stringify({
+
             requestId,
             signature
+
         })
     );
 
     return requestId;
 }
 
+
 function clearScanRequestId() {
+
     sessionStorage.removeItem(
         SCAN_REQUEST_STORAGE_KEY
     );
@@ -205,40 +286,26 @@ recipeGallery.addEventListener(
 
 function displayRecipePhoto(file) {
 
-    selectedRecipePhoto =
-        file;
-
-
-    // Supprime l'ancienne URL temporaire
+    selectedRecipePhoto = file;
 
     if (currentPreviewURL) {
 
         URL.revokeObjectURL(
             currentPreviewURL
         );
-
     }
-
 
     currentPreviewURL =
         URL.createObjectURL(file);
 
-
     recipePhotoPreview.src =
         currentPreviewURL;
 
+    scannerCamera.hidden = true;
 
-    scannerCamera.hidden =
-        true;
+    scannerPreview.hidden = false;
 
-
-    scannerPreview.hidden =
-        false;
-
-
-    scannerMessage.innerHTML =
-        "";
-
+    scannerMessage.innerHTML = "";
 }
 
 
@@ -250,16 +317,11 @@ changeRecipePhoto.addEventListener(
     "click",
     function () {
 
-        selectedRecipePhoto =
-            null;
+        selectedRecipePhoto = null;
 
+        recipePhoto.value = "";
 
-        recipePhoto.value =
-            "";
-
-        recipeGallery.value =
-            "";
-
+        recipeGallery.value = "";
 
         if (currentPreviewURL) {
 
@@ -267,26 +329,16 @@ changeRecipePhoto.addEventListener(
                 currentPreviewURL
             );
 
-            currentPreviewURL =
-                null;
-
+            currentPreviewURL = null;
         }
 
+        recipePhotoPreview.src = "";
 
-        recipePhotoPreview.src =
-            "";
+        scannerPreview.hidden = true;
 
+        scannerCamera.hidden = false;
 
-        scannerPreview.hidden =
-            true;
-
-
-        scannerCamera.hidden =
-            false;
-
-
-        scannerMessage.innerHTML =
-            "";
+        scannerMessage.innerHTML = "";
 
     }
 );
@@ -304,62 +356,12 @@ function fileToBase64(file) {
             const reader =
                 new FileReader();
 
+            reader.onload = function () {
 
-            reader.onload =
-                function () {
+                const result =
+                    reader.result;
 
-                    const result =
-                        reader.result;
-
-
-                    if (
-                        typeof result !==
-                        "string"
-                    ) {
-
-                        reject(
-                            new Error(
-                                "Impossible de lire la photo."
-                            )
-                        );
-
-                        return;
-                    }
-
-
-                    /*
-                        FileReader renvoie :
-
-                        data:image/jpeg;base64,ABCDEF...
-
-                        scan-recipe attend uniquement :
-
-                        ABCDEF...
-                    */
-
-                    const base64 =
-                        result.split(",")[1];
-
-
-                    if (!base64) {
-
-                        reject(
-                            new Error(
-                                "La photo n'a pas pu être convertie."
-                            )
-                        );
-
-                        return;
-                    }
-
-
-                    resolve(base64);
-
-                };
-
-
-            reader.onerror =
-                function () {
+                if (typeof result !== "string") {
 
                     reject(
                         new Error(
@@ -367,8 +369,34 @@ function fileToBase64(file) {
                         )
                     );
 
-                };
+                    return;
+                }
 
+                const base64 =
+                    result.split(",")[1];
+
+                if (!base64) {
+
+                    reject(
+                        new Error(
+                            "La photo n'a pas pu être convertie."
+                        )
+                    );
+
+                    return;
+                }
+
+                resolve(base64);
+            };
+
+            reader.onerror = function () {
+
+                reject(
+                    new Error(
+                        "Impossible de lire la photo."
+                    )
+                );
+            };
 
             reader.readAsDataURL(file);
 
@@ -378,7 +406,7 @@ function fileToBase64(file) {
 
 
 // ==========================================
-// SÉCURITÉ AFFICHAGE
+// SÉCURITÉ AFFICHAGE HTML
 // ==========================================
 
 function escapeHTML(value) {
@@ -389,6 +417,77 @@ function escapeHTML(value) {
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+}
+
+
+// ==========================================
+// NORMALISER LA RÉPONSE DU SCANNER
+// ==========================================
+
+function normalizeScannedRecipe(recipe) {
+
+    if (
+        !recipe ||
+        typeof recipe !== "object" ||
+        Array.isArray(recipe)
+    ) {
+
+        throw new Error(
+            "La réponse de l'IA ne contient pas de recette valide."
+        );
+    }
+
+    const normalized = {
+
+        title:
+            String(recipe.title ?? "").trim(),
+
+        description:
+            String(recipe.description ?? "").trim(),
+
+        category:
+            String(recipe.category ?? "Plat").trim(),
+
+        time:
+            String(recipe.time ?? "").trim(),
+
+        servings:
+            String(recipe.servings ?? "").trim(),
+
+        ingredients:
+            Array.isArray(recipe.ingredients)
+                ? recipe.ingredients
+                    .map(item => String(item).trim())
+                    .filter(Boolean)
+                : [],
+
+        instructions:
+            Array.isArray(recipe.instructions)
+                ? recipe.instructions
+                    .map(item => String(item).trim())
+                    .filter(Boolean)
+                : []
+
+    };
+
+    if (
+        !normalized.title &&
+        normalized.ingredients.length === 0 &&
+        normalized.instructions.length === 0
+    ) {
+
+        console.error(
+            "Recette reçue sans contenu exploitable :",
+            recipe
+        );
+
+        throw new Error(
+            "L'IA n'a renvoyé aucune information de recette. " +
+            "Le formulaire ne peut pas être rempli."
+        );
+    }
+
+    return normalized;
 }
 
 
@@ -407,17 +506,13 @@ analyseRecipePhoto.addEventListener(
                     Sélectionnez d'abord une photo.
                 </div>
             `;
-                        return;
+
+            return;
         }
 
         try {
 
-            // ======================================
-            // ÉTAT CHARGEMENT
-            // ======================================
-
-            analyseRecipePhoto.disabled =
-                true;
+            analyseRecipePhoto.disabled = true;
 
             analyseRecipePhoto.textContent =
                 "✨ Lecture de la recette...";
@@ -428,18 +523,18 @@ analyseRecipePhoto.addEventListener(
                 </div>
             `;
 
-            // ======================================
+            // ==================================
             // CONVERSION PHOTO
-            // ======================================
+            // ==================================
 
             const imageBase64 =
                 await fileToBase64(
                     selectedRecipePhoto
                 );
 
-            // ======================================
+            // ==================================
             // APPEL EDGE FUNCTION
-            // ======================================
+            // ==================================
 
             const {
                 data,
@@ -468,9 +563,9 @@ analyseRecipePhoto.addEventListener(
                         }
                     );
 
-            // ======================================
+            // ==================================
             // ERREUR SUPABASE
-            // ======================================
+            // ==================================
 
             if (error) {
 
@@ -484,12 +579,15 @@ analyseRecipePhoto.addEventListener(
                     try {
 
                         const details =
-                            await error.context.clone().json();
+                            await error.context
+                                .clone()
+                                .json();
 
                         if (
                             details.requestStatus === "failed" ||
                             details.requestStatus === "request_expired"
                         ) {
+
                             clearScanRequestId();
                         }
 
@@ -499,7 +597,6 @@ analyseRecipePhoto.addEventListener(
                             "Détails de l'erreur indisponibles :",
                             readError
                         );
-
                     }
                 }
 
@@ -508,14 +605,11 @@ analyseRecipePhoto.addEventListener(
                 );
             }
 
-            // ======================================
-            // VÉRIFICATION RÉPONSE
-            // ======================================
+            // ==================================
+            // VÉRIFIER LA RÉPONSE
+            // ==================================
 
-            if (
-                !data ||
-                !data.recipe
-            ) {
+            if (!data || !data.recipe) {
 
                 console.error(
                     "Réponse scan-recipe :",
@@ -527,16 +621,19 @@ analyseRecipePhoto.addEventListener(
                 );
             }
 
-            // ======================================
-            // AFFICHAGE RECETTE
-            // ======================================
+            // ==================================
+            // PRÉPARER ET AFFICHER LA RECETTE
+            // ==================================
+
+            const scannedRecipe =
+                normalizeScannedRecipe(
+                    data.recipe
+                );
 
             displayScannedRecipe(
-                data.recipe
+                scannedRecipe
             );
 
-            // La recette est bien affichée :
-            // le prochain scan pourra avoir un nouvel identifiant.
             clearScanRequestId();
 
         } catch (error) {
@@ -548,22 +645,21 @@ analyseRecipePhoto.addEventListener(
 
             scannerMessage.innerHTML = `
                 <div class="scanner-error">
+
                     <strong>
                         Impossible de lire la recette.
                     </strong>
 
                     <p>
-                        ${escapeHTML(
-                            error.message
-                        )}
+                        ${escapeHTML(error.message)}
                     </p>
+
                 </div>
             `;
 
         } finally {
 
-            analyseRecipePhoto.disabled =
-                false;
+            analyseRecipePhoto.disabled = false;
 
             analyseRecipePhoto.textContent =
                 "✨ Lire cette recette avec l'IA";
@@ -575,7 +671,7 @@ analyseRecipePhoto.addEventListener(
 
 
 // ==========================================
-// IMAGE PAR DÉFAUT SELON LA CATÉGORIE
+// IMAGE PAR DÉFAUT SELON CATÉGORIE
 // ==========================================
 
 function getDefaultScannedRecipeImage(category) {
@@ -609,7 +705,7 @@ function getDefaultScannedRecipeImage(category) {
 
 
 // ==========================================
-// BASE64 → BLOB
+// BASE64 VERS BLOB
 // ==========================================
 
 function base64ToBlob(base64, mimeType) {
@@ -628,7 +724,6 @@ function base64ToBlob(base64, mimeType) {
 
         byteNumbers[i] =
             byteCharacters.charCodeAt(i);
-
     }
 
     const byteArray =
@@ -637,11 +732,11 @@ function base64ToBlob(base64, mimeType) {
     return new Blob(
         [byteArray],
         {
-            type:
-                mimeType || "image/jpeg"
+            type: mimeType || "image/jpeg"
         }
     );
 }
+
 
 // ==========================================
 // GÉNÉRER LA PHOTO IA DE LA RECETTE
@@ -654,9 +749,9 @@ async function generateScannedRecipeImage(
 
     try {
 
-        // ======================================
+        // ==================================
         // APPEL EDGE FUNCTION IMAGE
-        // ======================================
+        // ==================================
 
         const {
             data,
@@ -685,7 +780,6 @@ async function generateScannedRecipeImage(
                     }
                 );
 
-
         if (error) {
 
             console.error(
@@ -696,11 +790,7 @@ async function generateScannedRecipeImage(
             throw error;
         }
 
-
-        if (
-            !data ||
-            !data.image
-        ) {
+        if (!data || !data.image) {
 
             console.error(
                 "Aucune image IA reçue :",
@@ -712,30 +802,22 @@ async function generateScannedRecipeImage(
             );
         }
 
-
-        // ======================================
-        // BASE64 → FICHIER JPEG
-        // ======================================
+        // ==================================
+        // BASE64 VERS IMAGE
+        // ==================================
 
         const imageBlob =
             base64ToBlob(
                 data.image,
-                data.mimeType ||
-                    "image/jpeg"
+                data.mimeType || "image/jpeg"
             );
-
-
-        // ======================================
-        // NOM DU FICHIER
-        // ======================================
 
         const filePath =
             `${user.id}/scan-${Date.now()}.jpg`;
 
-
-        // ======================================
+        // ==================================
         // UPLOAD STORAGE
-        // ======================================
+        // ==================================
 
         const {
             error: uploadError
@@ -747,14 +829,10 @@ async function generateScannedRecipeImage(
                     filePath,
                     imageBlob,
                     {
-                        contentType:
-                            "image/jpeg",
-
-                        upsert:
-                            false
+                        contentType: "image/jpeg",
+                        upsert: false
                     }
                 );
-
 
         if (uploadError) {
 
@@ -766,10 +844,9 @@ async function generateScannedRecipeImage(
             throw uploadError;
         }
 
-
-        // ======================================
+        // ==================================
         // URL PUBLIQUE
-        // ======================================
+        // ==================================
 
         const {
             data: publicURLData
@@ -781,7 +858,6 @@ async function generateScannedRecipeImage(
                     filePath
                 );
 
-
         if (
             !publicURLData ||
             !publicURLData.publicUrl
@@ -792,9 +868,7 @@ async function generateScannedRecipeImage(
             );
         }
 
-
         return publicURLData.publicUrl;
-
 
     } catch (error) {
 
@@ -803,18 +877,10 @@ async function generateScannedRecipeImage(
             error
         );
 
-
-        // ======================================
-        // SI L'IMAGE IA ÉCHOUE
-        // ON GARDE UNE IMAGE PAR DÉFAUT
-        // ======================================
-
         return getDefaultScannedRecipeImage(
             recipe.category
         );
-
     }
-
 }
 
 
@@ -824,35 +890,25 @@ async function generateScannedRecipeImage(
 
 function displayScannedRecipe(recipe) {
 
-    // ==========================================
-    // PRÉPARATION DES DONNÉES
-    // ==========================================
-
     const ingredients =
         Array.isArray(recipe.ingredients)
             ? recipe.ingredients
             : [];
-
 
     const instructions =
         Array.isArray(recipe.instructions)
             ? recipe.instructions
             : [];
 
-
-    // Une ligne = un ingrédient
     const ingredientsText =
         ingredients.join("\n");
 
-
-    // Une ligne = une étape
     const instructionsText =
         instructions.join("\n");
 
-
-    // ==========================================
-    // AFFICHAGE DU FORMULAIRE DE CORRECTION
-    // ==========================================
+    // ==================================
+    // FORMULAIRE DE CORRECTION
+    // ==================================
 
     scannerMessage.innerHTML = `
 
@@ -912,7 +968,6 @@ function displayScannedRecipe(recipe) {
             <!-- INFORMATIONS -->
 
             <div class="scanner-info-grid">
-
 
                 <div class="scanner-field">
 
@@ -993,7 +1048,6 @@ function displayScannedRecipe(recipe) {
 
                 </div>
 
-
             </div>
 
 
@@ -1060,36 +1114,47 @@ function displayScannedRecipe(recipe) {
             </div>
 
         </section>
-
     `;
 
-        // ==========================================
+
+    // ==========================================
     // BOUTON : REPRENDRE LA PHOTO
     // ==========================================
 
     const cancelButton =
-        document.getElementById("cancelScannedRecipe");
+        document.getElementById(
+            "cancelScannedRecipe"
+        );
 
-    cancelButton.addEventListener("click", function () {
+    cancelButton.addEventListener(
+        "click",
+        function () {
 
-        selectedRecipePhoto = null;
+            selectedRecipePhoto = null;
 
-        recipePhoto.value = "";
-        recipeGallery.value = "";
+            recipePhoto.value = "";
 
-        if (currentPreviewURL) {
-            URL.revokeObjectURL(currentPreviewURL);
-            currentPreviewURL = null;
+            recipeGallery.value = "";
+
+            if (currentPreviewURL) {
+
+                URL.revokeObjectURL(
+                    currentPreviewURL
+                );
+
+                currentPreviewURL = null;
+            }
+
+            recipePhotoPreview.src = "";
+
+            scannerPreview.hidden = true;
+
+            scannerCamera.hidden = false;
+
+            scannerMessage.innerHTML = "";
+
         }
-
-        recipePhotoPreview.src = "";
-
-        scannerPreview.hidden = true;
-        scannerCamera.hidden = false;
-
-        scannerMessage.innerHTML = "";
-
-    });
+    );
 
 
     // ==========================================
@@ -1097,291 +1162,315 @@ function displayScannedRecipe(recipe) {
     // ==========================================
 
     const saveButton =
-        document.getElementById("saveScannedRecipe");
-
-    // Conserver l'image si l'enregistrement échoue
-    let savedImageURL = null;    
-
-    saveButton.addEventListener("click", async function () {
-
-        if (saveButton.disabled) {
-            return;
-        }
-
-        const title =
-            document.getElementById("scannedTitle").value.trim();
-
-        const description =
-            document.getElementById("scannedDescription").value.trim();
-
-        const category =
-            document.getElementById("scannedCategory").value;
-
-        const time =
-            document.getElementById("scannedTime").value.trim();
-
-        const servings =
-            document.getElementById("scannedServings").value.trim();
-
-        const ingredients =
-            document.getElementById("scannedIngredients")
-                .value
-                .split("\n")
-                .map(item => item.trim())
-                .filter(Boolean);
-
-        const instructions =
-            document.getElementById("scannedInstructions")
-                .value
-                .split("\n")
-                .map(item => item.trim())
-                .filter(Boolean);
+        document.getElementById(
+            "saveScannedRecipe"
+        );
 
 
-        // ======================================
-        // VALIDATION
-        // ======================================
 
-        if (
-            !title ||
-            ingredients.length === 0 ||
-            instructions.length === 0
-        ) {
+    saveButton.addEventListener(
+        "click",
+        async function () {
 
-            alert(
-                "Merci de renseigner le titre, les ingrédients " +
-                "et la préparation."
-            );
-
-            return;
-        }
-
-
-        saveButton.disabled = true;
-        saveButton.textContent = "Vérification du carnet...";
-
-
-        try {
+            if (saveButton.disabled) {
+                return;
+            }
 
             // ==================================
-            // UTILISATEUR CONNECTÉ
+            // RÉCUPÉRER LES CHAMPS
             // ==================================
 
-            const {
-                data: authData,
-                error: authError
-            } =
-                await supabaseClient.auth.getUser();
+            const title =
+                document
+                    .getElementById("scannedTitle")
+                    .value
+                    .trim();
 
-            if (authError || !authData?.user) {
+            const description =
+                document
+                    .getElementById("scannedDescription")
+                    .value
+                    .trim();
+
+            const category =
+                document
+                    .getElementById("scannedCategory")
+                    .value;
+
+            const time =
+                document
+                    .getElementById("scannedTime")
+                    .value
+                    .trim();
+
+            const servings =
+                document
+                    .getElementById("scannedServings")
+                    .value
+                    .trim();
+
+            const ingredients =
+                document
+                    .getElementById("scannedIngredients")
+                    .value
+                    .split("\n")
+                    .map(item => item.trim())
+                    .filter(Boolean);
+
+            const instructions =
+                document
+                    .getElementById("scannedInstructions")
+                    .value
+                    .split("\n")
+                    .map(item => item.trim())
+                    .filter(Boolean);
+
+
+            // ==================================
+            // VALIDATION
+            // ==================================
+
+            if (
+                !title ||
+                ingredients.length === 0 ||
+                instructions.length === 0
+            ) {
 
                 alert(
-                    "Vous devez être connecté pour enregistrer cette recette."
+                    "Merci de renseigner le titre, les ingrédients " +
+                    "et la préparation."
                 );
 
                 return;
             }
 
-            const user = authData.user;
-
-
-            // ==================================
-            // VÉRIFIER LA CAPACITÉ DU CARNET
-            // ==================================
-
-            const carnetLimit =
-                await checkAICarnetCapacity(user.id);
-
-            if (carnetLimit !== null) {
-
-                alert(
-                    aiCarnetFullMessage(carnetLimit)
-                );
-
-                return;
-            }
-
-
-            // ==================================
-            // PRÉPARER LA RECETTE
-            // ==================================
-
-            const scannedRecipe = {
-
-                title,
-                description,
-                category,
-                time,
-                servings,
-                ingredients,
-                instructions
-
-            };
-
-
-            // ==================================
-            // GÉNÉRER LA PHOTO IA
-            // ==================================
+            saveButton.disabled = true;
 
             saveButton.textContent =
-                "Création de la photo IA...";
+                "Vérification du carnet...";
 
-            // Générer l'image uniquement si elle
-            // n'a pas déjà été créée pendant cette sauvegarde.
 
-            if (!savedImageURL) {
+            try {
 
-                savedImageURL =
-                    await generateScannedRecipeImage(
-                        correctedRecipe,
-                        user
+                // ==================================
+                // UTILISATEUR CONNECTÉ
+                // ==================================
+
+                const {
+                    data: authData,
+                    error: authError
+                } =
+                    await supabaseClient
+                        .auth
+                        .getUser();
+
+                if (
+                    authError ||
+                    !authData?.user
+                ) {
+
+                    alert(
+                        "Vous devez être connecté pour enregistrer cette recette."
                     );
 
-            }
+                    return;
+                }
 
-            // Réutiliser l'image existante
-            // en cas de nouvelle tentative.
-
-            const imageURL = savedImageURL;
-
-
-            // ==================================
-            // ENREGISTRER DANS SUPABASE
-            // ==================================
-
-            saveButton.textContent =
-                "Enregistrement...";
-
-            const newRecipe = {
-
-                title,
-                description,
-                category,
-                time,
-                servings,
-
-                ingredients,
-
-                instructions:
-                    instructions.join("\n"),
-
-                image:
-                    imageURL,
-
-                source:
-                    "scan",
-
-                user_id:
-                    user.id
-
-            };
+                const user =
+                    authData.user;
 
 
-            const {
-                data,
-                error
-            } =
-                await supabaseClient
-                    .from("recipes")
-                    .insert(newRecipe)
-                    .select()
-                    .single();
+                // ==================================
+                // VÉRIFIER CAPACITÉ DU CARNET
+                // ==================================
+
+                const carnetLimit =
+                    await checkAICarnetCapacity(
+                        user.id
+                    );
+
+                if (carnetLimit !== null) {
+
+                    alert(
+                        aiCarnetFullMessage(
+                            carnetLimit
+                        )
+                    );
+
+                    return;
+                }
 
 
-            // ==================================
-            // GESTION DES ERREURS
-            // ==================================
+                // ==================================
+                // PRÉPARER LA RECETTE
+                // ==================================
 
-            if (error) {
+                const scannedRecipe = {
+
+                    title,
+                    description,
+                    category,
+                    time,
+                    servings,
+                    ingredients,
+                    instructions
+
+                };
+
+
+
+                // ==================================
+                // IMAGE PAR DÉFAUT
+                // ==================================
+
+                // Aucune génération de photo IA
+                // lors de l'enregistrement.
+
+                const imageURL =
+                    getDefaultScannedRecipeImage(
+                        category
+                    );
+
+
+
+                // ==================================
+                // ENREGISTRER DANS SUPABASE
+                // ==================================
+
+                saveButton.textContent =
+                    "Enregistrement...";
+
+                const newRecipe = {
+
+                    title,
+                    description,
+                    category,
+                    time,
+                    servings,
+
+                    ingredients,
+
+                    instructions:
+                        instructions.join("\n"),
+
+                    image:
+                        imageURL,
+
+                    source:
+                        "scan",
+
+                    user_id:
+                        user.id
+
+                };
+
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .from("recipes")
+                        .insert(newRecipe)
+                        .select()
+                        .single();
+
+
+                // ==================================
+                // GESTION DES ERREURS
+                // ==================================
+
+                if (error) {
+
+                    console.error(
+                        "Erreur enregistrement scanner :",
+                        error
+                    );
+
+                    if (
+                        error.message &&
+                        error.message.includes(
+                            "RECIPE_LIMIT_REACHED"
+                        )
+                    ) {
+
+                        const limit =
+                            await checkAICarnetCapacity(
+                                user.id
+                            );
+
+                        alert(
+                            aiCarnetFullMessage(limit)
+                        );
+
+                    } else {
+
+                        alert(
+                            "Impossible d'enregistrer la recette : " +
+                            error.message
+                        );
+                    }
+
+                    return;
+                }
+
+
+                // ==================================
+                // ENREGISTREMENT RÉUSSI
+                // ==================================
+
+                saveButton.textContent =
+                    "✓ Recette enregistrée";
+
+                scannerMessage.innerHTML = `
+                    <div class="scanner-ready">
+                        Votre recette a bien été enregistrée !
+                    </div>
+                `;
+
+
+                // ==================================
+                // REDIRECTION VERS LA RECETTE
+                // ==================================
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            `./ma-recette.html?id=${data.id}`;
+
+                    },
+                    800
+                );
+
+            } catch (error) {
 
                 console.error(
-                    "Erreur enregistrement scanner :",
+                    "Erreur sauvegarde scanner :",
                     error
                 );
 
+                alert(
+                    "Une erreur est survenue pendant l'enregistrement."
+                );
+
+            } finally {
+
                 if (
-                    error.message &&
-                    error.message.includes(
-                        "RECIPE_LIMIT_REACHED"
-                    )
+                    saveButton.textContent !==
+                    "✓ Recette enregistrée"
                 ) {
 
-                    const limit =
-                        await checkAICarnetCapacity(
-                            user.id
-                        );
+                    saveButton.disabled = false;
 
-                    alert(
-                        aiCarnetFullMessage(limit)
-                    );
-
-                } else {
-
-                    alert(
-                        "Impossible d'enregistrer la recette : " +
-                        error.message
-                    );
-
+                    saveButton.textContent =
+                        "💾 Enregistrer dans mon carnet";
                 }
-
-                return;
-            }
-
-
-            // ==================================
-            // ENREGISTREMENT RÉUSSI
-            // ==================================
-
-            saveButton.textContent =
-                "✓ Recette enregistrée";
-
-            scannerMessage.innerHTML = `
-                <div class="scanner-ready">
-                    Votre recette a bien été enregistrée !
-                </div>
-            `;
-
-
-            // ==================================
-            // REDIRECTION VERS LA RECETTE
-            // ==================================
-
-            setTimeout(function () {
-
-                window.location.href =
-                    `./ma-recette.html?id=${data.id}`;
-
-            }, 800);
-
-
-        } catch (error) {
-
-            console.error(
-                "Erreur sauvegarde scanner :",
-                error
-            );
-
-            alert(
-                "Une erreur est survenue pendant l'enregistrement."
-            );
-
-
-        } finally {
-
-            if (
-                saveButton.textContent !==
-                "✓ Recette enregistrée"
-            ) {
-
-                saveButton.disabled = false;
-
-                saveButton.textContent =
-                    "💾 Enregistrer dans mon carnet";
-
             }
 
         }
+    );
 
-    });
+}
 
-} // FIN DE displayScannedRecipe()
+// FIN DE scanner-recette.js
