@@ -100,7 +100,7 @@ body {
 }
 
 .hero {
-    min-height: 420px;
+    min-height: 520px;
 
     background: url("../image/hero.PNG");
     background-size: cover;
@@ -300,6 +300,197 @@ body {
     margin-right: auto;
 
     line-height: 1.6;
+}
+
+/* ==========================================
+   ACCUEIL - BOUTON SITES COMPATIBLES
+========================================== */
+
+.search-url-sites-button {
+    display: block;
+
+    margin: 10px auto 0;
+    padding: 10px 20px;
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+
+    background: rgba(0, 0, 0, 0.45);
+    color: #ffffff;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.search-url-sites-button:hover {
+    background: #087a3e;
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================
+   ACCUEIL - FENÊTRE SITES COMPATIBLES
+========================================== */
+
+.compatible-sites-dialog {
+    width: min(560px, 92%);
+
+    max-height: 85vh;
+
+    margin: auto;
+    padding: 30px;
+
+    border: none;
+    border-radius: 20px;
+
+    background: #fdfbf8;
+    color: #111111;
+
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+
+    font-family: "Poppins", sans-serif;
+}
+
+.compatible-sites-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.compatible-sites-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+}
+
+.compatible-sites-header h2 {
+    margin: 0;
+
+    font-family: "Playfair Display", serif;
+    font-size: 26px;
+
+    color: #087a3e;
+}
+
+.compatible-sites-close {
+    flex-shrink: 0;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #e8f5ed;
+    color: #087a3e;
+
+    font-size: 26px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.compatible-sites-close:hover {
+    background: #087a3e;
+    color: #ffffff;
+}
+
+.compatible-sites-description {
+    margin-bottom: 20px;
+
+    font-size: 13px;
+    line-height: 1.7;
+
+    color: #555555;
+}
+
+
+/* ==========================================
+   ACCUEIL - LISTE DES 18 SITES
+========================================== */
+
+.compatible-sites-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+.compatible-sites-list a {
+    display: block;
+
+    padding: 12px 14px;
+
+    border: 1px solid #e4e9e5;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #087a3e;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.compatible-sites-list a:hover {
+    background: #e8f5ed;
+    border-color: #087a3e;
+}
+
+.compatible-sites-list a:focus-visible,
+.compatible-sites-close:focus-visible,
+.search-url-sites-button:focus-visible {
+    outline: 3px solid #087a3e;
+    outline-offset: 3px;
+}
+
+
+/* ==========================================
+   RESPONSIVE - FENÊTRE SITES COMPATIBLES
+========================================== */
+
+@media (max-width: 600px) {
+
+    .compatible-sites-dialog {
+        width: 94%;
+
+        max-height: 85vh;
+
+        padding: 20px;
+    }
+
+    .compatible-sites-header h2 {
+        font-size: 21px;
+    }
+
+    .compatible-sites-list {
+        grid-template-columns: 1fr;
+    }
+
+    .compatible-sites-list a {
+        padding: 11px 12px;
+        font-size: 12px;
+    }
+
+    .search-url-sites-button {
+        max-width: 100%;
+        font-size: 12px;
+    }
+
 }
 
 
@@ -10090,4 +10281,6 @@ body:has(.voir-defi-page) .fridge-result-day>h3 {
     overflow-wrap: anywhere;
     word-break: break-word;
 }
+
+
 
