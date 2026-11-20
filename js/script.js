@@ -554,5 +554,56 @@ if (cancelPaymentStatus === "cancel") {
     );
 }
 
+// ==========================================
+// ACCUEIL - FENÊTRE DES SITES COMPATIBLES
+// ==========================================
+
+const openCompatibleSites = document.getElementById("openCompatibleSites");
+
+const closeCompatibleSites = document.getElementById("closeCompatibleSites");
+
+const compatibleSitesDialog = document.getElementById("compatibleSitesDialog");
+
+
+// ==========================================
+// OUVERTURE ET FERMETURE DE LA FENÊTRE
+// ==========================================
+
+if (openCompatibleSites && closeCompatibleSites && compatibleSitesDialog) {
+
+    // Ouvrir la fenêtre
+
+    openCompatibleSites.addEventListener("click", () => {
+
+        if (!compatibleSitesDialog.open) {
+            compatibleSitesDialog.showModal();
+        }
+
+    });
+
+
+    // Fermer avec la croix
+
+    closeCompatibleSites.addEventListener("click", () => {
+
+        compatibleSitesDialog.close();
+
+    });
+
+
+    // Fermer en cliquant sur le fond sombre
+
+    compatibleSitesDialog.addEventListener("click", (event) => {
+
+        if (event.target === compatibleSitesDialog) {
+
+            compatibleSitesDialog.close();
+
+        }
+
+    });
+
+}
+
 
 
