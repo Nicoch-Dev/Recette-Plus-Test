@@ -135,9 +135,92 @@
                     Collez son lien ici pour l'importer !
                 </p>
 
-                <p class="search-url-sites">
-                    Compatible avec Jow, Marmiton, 750g et CuisineAZ.
-                </p>
+                <!-- ==========================================
+                    BOUTON - SITES DE RECETTES COMPATIBLES
+                ========================================== -->
+
+                <button type="button" class="search-url-sites-button" id="openCompatibleSites" aria-haspopup="dialog">
+                    🔗 Voir les 18 sites de recettes compatibles
+                </button>
+
+                <!-- ==========================================
+     FENÊTRE - SITES DE RECETTES COMPATIBLES
+========================================== -->
+
+                <dialog class="compatible-sites-dialog" id="compatibleSitesDialog"
+                    aria-labelledby="compatibleSitesTitle">
+
+                    <div class="compatible-sites-header">
+
+                        <h2 id="compatibleSitesTitle">
+                            🌐 Sites de recettes compatibles
+                        </h2>
+
+                        <button type="button" class="compatible-sites-close" id="closeCompatibleSites"
+                            aria-label="Fermer la fenêtre">
+                            &times;
+                        </button>
+
+                    </div>
+
+                    <p class="compatible-sites-description">
+                        Découvrez les sites compatibles avec Recette Plus.
+                        Choisissez une recette, copiez son lien et collez-le
+                        dans notre barre de recherche pour l'importer.
+                    </p>
+
+                    <div class="compatible-sites-list">
+
+                        <a href="https://jow.fr" target="_blank" rel="noopener noreferrer">Jow</a>
+
+                        <a href="https://www.marmiton.org" target="_blank" rel="noopener noreferrer">Marmiton</a>
+
+                        <a href="https://www.750g.com" target="_blank" rel="noopener noreferrer">750g</a>
+
+                        <a href="https://odelices.ouest-france.fr" target="_blank"
+                            rel="noopener noreferrer">Ôdélices</a>
+
+                        <a href="https://www.cuisineactuelle.fr" target="_blank" rel="noopener noreferrer">Cuisine
+                            Actuelle</a>
+
+                        <a href="https://www.ptitchef.com" target="_blank" rel="noopener noreferrer">Ptitchef</a>
+
+                        <a href="https://chefsimon.com" target="_blank" rel="noopener noreferrer">Chef Simon</a>
+
+                        <a href="https://www.meilleurduchef.com" target="_blank" rel="noopener noreferrer">Meilleur du
+                            Chef</a>
+
+                        <a href="https://cuisine.journaldesfemmes.fr" target="_blank" rel="noopener noreferrer">Journal
+                            des Femmes</a>
+
+                        <a href="https://www.hervecuisine.com" target="_blank" rel="noopener noreferrer">Hervé
+                            Cuisine</a>
+
+                        <a href="https://www.lacuisinedebernard.com" target="_blank" rel="noopener noreferrer">La
+                            Cuisine de Bernard</a>
+
+                        <a href="https://www.cookomix.com" target="_blank" rel="noopener noreferrer">Cookomix</a>
+
+                        <a href="https://www.ricardocuisine.com" target="_blank" rel="noopener noreferrer">Ricardo
+                            Cuisine</a>
+
+                        <a href="https://www.recettes.com" target="_blank" rel="noopener noreferrer">Recettes.com</a>
+
+                        <a href="https://www.cuisineaddict.com" target="_blank" rel="noopener noreferrer">Cuisine
+                            Addict</a>
+
+                        <a href="https://www.undejeunerdesoleil.com" target="_blank" rel="noopener noreferrer">Un
+                            déjeuner de soleil</a>
+
+                        <a href="https://www.mesinspirationsculinaires.com" target="_blank"
+                            rel="noopener noreferrer">Mes inspirations culinaires</a>
+
+                        <a href="https://www.iletaitunefoislapatisserie.com" target="_blank"
+                            rel="noopener noreferrer">Il était une fois la pâtisserie</a>
+
+                    </div>
+
+                </dialog>
 
             </div>
 
